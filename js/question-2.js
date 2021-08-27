@@ -8,16 +8,21 @@ const sectionHeading = document.querySelector(".section-header");
 async function fetchFromApi() {
     sectionHeading.innerHTML = `<div class="loading-spinner">Fetching from API</div>`;
 
-    const response = await fetch(rawgURL);
-    const result = await response.json();
-    if (result.results) {
-        sectionHeading.innerHTML = `Results:`;
-        for (let [index, item] of result.results.entries()) { // could do this with a plain for loop, but I've gotten into the habit of using for-of.
-            if(index === 8) {
-                break;
+    try {
+        const response = await fetch(rawgURL);
+        const result = await response.json();
+        if (result.results) {
+            sectionHeading.innerHTML = `Results:`;
+            for (let [index, item] of result.results.entries()) { // could do this with a plain for loop, but I've gotten into the habit of using for-of.
+                if(index === 8) {
+                    break;
+                }
+                outputItem(buildItem(item), resultContainer);
             }
-            outputItem(buildItem(item), resultContainer);
-        }
+        } 
+    } catch (err) {
+        console.error(err);
+        sectionHeading.innerHTML = `Something went wrong: <p>${err}</p>`
     }
 }
 
