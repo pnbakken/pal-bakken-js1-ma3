@@ -10,7 +10,6 @@ async function fetchFromApi() {
 
     const response = await fetch(rawgURL);
     const result = await response.json();
-    console.log(result.results);
     if (result.results) {
         sectionHeading.innerHTML = `Results:`;
         for (let [index, item] of result.results.entries()) { // could do this with a plain for loop, but I've gotten into the habit of using for-of.
