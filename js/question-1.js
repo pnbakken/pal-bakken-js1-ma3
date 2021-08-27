@@ -1,3 +1,3 @@
 // Question 1
 
-let getRemainder = (a, b) => a % b;
+const getRemainder = (a, b) => a % b;
