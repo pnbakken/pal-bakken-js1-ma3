@@ -2,21 +2,21 @@ const apiKey = "c989a2e2ef644b9db6ec4a8c9e8952fc";
 const rawgURL = `https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=-rating&key=${apiKey}`;
 const corsURL = "https://noroffcors.herokuapp.com/" + rawgURL; // added if neccessary but so far so good.
 const resultContainer = document.querySelector("#result-container")
+const sectionHeading = document.querySelector(".section-header");
 console.log(document);
 
 async function fetchFromApi() {
-    
+    sectionHeading.innerHTML = `<div class="loading-spinner">Fetching from API</div>`;
+
     const response = await fetch(rawgURL);
     const result = await response.json();
     console.log(result.results);
-    document.querySelector(".section-header").innerHTML = `<div class="loading-spinner">Fetching from API</div>`;
     if (result.results) {
-        for (let item of result.results) {
-            if(item.index === 8) {
+        sectionHeading.innerHTML = `Results:`;
+        for (let [index, item] of result.results.entries()) { // could do this with a plain for loop, but I've gotten into the habit of using for-of.
+            if(index === 8) {
                 break;
             }
-            console.log(item);
-            console.log(buildItem(item));
             outputItem(buildItem(item), resultContainer);
         }
     }
