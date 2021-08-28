@@ -64,12 +64,18 @@ function buildItem(rawItem) {
 function outputItem(index, item, container) {
     // Not really sure i need the game number id. I might just be adding whatever stuff I can think to do.
     // Should change the html for this.
+
+    let rating;
+    if (item.rating >= 4.5) {
+        rating = "high";
+    } else {
+        rating = "low";
+    }
+
     container.innerHTML += `<div class="item">
-                                <ul>
-                                    <li>Name: ${item.name}</li>
-                                    <li>Rating: ${item.rating}</li>
-                                    <li>Number of tags: ${item.tags.length}</li>
-                                </ul>
+                                <p class="game-name">${item.name}</p>
+                                <p class="game-rating ${rating}">${item.rating}</p>
+                                <p class="game-tags">${item.tags.length}</p>
                             </div>`;
                             
 }
