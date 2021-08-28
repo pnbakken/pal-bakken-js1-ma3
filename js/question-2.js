@@ -13,7 +13,7 @@ async function fetchFromApi() {
         const result = await response.json();
         if (result.results) {
             sectionHeading.innerHTML = `Results:`;
-            for (let [index, item] of result.results.entries()) { // could do this with a plain for loop, but I've gotten into the habit of using for-of.
+            for (let [index, item] of result.results.entries()) { // could do this with a regular for loop, but I've gotten into the habit of using for-of.
                 if(index === 8) {
                     break;
                 }
@@ -22,7 +22,7 @@ async function fetchFromApi() {
         } 
     } catch (err) {
         console.error(err);
-        sectionHeading.innerHTML = `Something went wrong: <p>${err}</p>`
+        sectionHeading.innerHTML = `Something went wrong: <p class="script-error">${err}</p>`
     }
 }
 
@@ -32,7 +32,6 @@ function buildItem(rawItem) {
         name: "No name",
         rating: "No rating",
         tags: [],
-
     }
 
     if (rawItem.name) {
