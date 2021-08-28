@@ -6,7 +6,9 @@ const resultContainer = document.querySelector("#result-container")
 const sectionHeading = document.querySelector(".section-header");
 
 async function fetchFromApi() {
-    sectionHeading.innerHTML = `<div class="loading-spinner">Fetching from API</div>`;
+    //Loader copied from w3schools.
+    sectionHeading.innerHTML = `Fetching from RAWG API
+                                <div class="loader"></div>`;
 
     try {
         const response = await fetch(rawgURL);
@@ -19,6 +21,7 @@ async function fetchFromApi() {
                     //this break seems to work fine on its own, without the 'else' statement. I suppose that's how 'break' functions, but I added an 'else' to be safe.
                 } else {
                     outputItem(index, buildItem(item), resultContainer);
+                    console.log(item);
                 }
                 
             }
@@ -46,6 +49,7 @@ function buildItem(rawItem) {
         name: "No name",
         rating: "No rating",
         tags: [],
+        imgSRC: "",
     }
 
     if (rawItem.name) {
@@ -56,6 +60,10 @@ function buildItem(rawItem) {
     }
     if(rawItem.tags) {
         newItem.tags = rawItem.tags;
+    }
+    if(rawItem.background_image) {
+        newItem.imgSRC = rawItem.background_image;
+        console.log(newItem.imgSRC);
     }
 
     return newItem;
@@ -74,8 +82,9 @@ function outputItem(index, item, container) {
 
     container.innerHTML += `<div class="item">
                                 <p class="game-name">${item.name}</p>
-                                <p class="game-rating ${rating}">${item.rating}</p>
-                                <p class="game-tags">${item.tags.length}</p>
+                                <img src="${item.imgSRC}" alt="${item.name} screenshot" />
+                                <p>Rating: <span class="game-rating ${rating}">${item.rating}</span></p>
+                                <p>Tags: <span class="game-tags">${item.tags.length}</span></p>
                             </div>`;
                             
 }

@@ -1,11 +1,12 @@
+
 body {
     background: #6687AD;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    grid-gap: 50px;
     align-items: center;
     justify-content: center;
-    min-height: 1vh;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     font-family: sans-serif;
 }
 
@@ -23,10 +24,11 @@ body {
     width: 100%;
     border-bottom: 1px solid black;
     padding-top: 10px;
+    font-size: 2rem;
 }
 
 .script-error {
-
+    color: red;
 }
 
 #result-container {
@@ -42,12 +44,13 @@ body {
     box-shadow: 5px 2px 5px #686868;
     border-radius: 5px;
     padding: 10px 15px;
-    width: 170px;
+    width: 250px;
+    color: white;
 }
 
 .game-name {
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight:500;
     text-align: center;
 }
@@ -55,7 +58,6 @@ body {
 .game-rating {
     
     font-size: 1.2rem;
-    text-align: right;
 }
 
 .high {
@@ -67,7 +69,45 @@ body {
 }
 
 .game-tags {
-    color: #09ff00;
-    text-align: right;
+    color: #bccfe4;
 }
+
+img {
+    max-width: 100%;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background: #293a4e;
+    color: white;
+    font-size: 1.2rem;
+    position: relative;
+    bottom: 0px;
+}
+
+footer a {
+    color: white;
+    transition: 1.5s;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+/* Loader copied from w3schools */
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #1b28db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  } 
 
