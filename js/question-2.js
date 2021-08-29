@@ -13,14 +13,15 @@ async function fetchFromApi() {
     try {
         const response = await fetch(rawgURL);
         const result = await response.json();
+        let limit = 8;
         if (result.results) {
-            sectionHeading.innerHTML = `Results:`;
+            sectionHeading.innerHTML = `Showing ${limit} results:`;
             for (let [index, item] of result.results.entries()) { // could do this with a regular for loop, but I've gotten into the habit of using for-of.
-                if(index === 8) {
+                if(index === limit) {
                     break;
                     //this break seems to work fine on its own, without the 'else' statement. I suppose that's how 'break' functions, but I added an 'else' to be safe.
                 } else {
-                    outputItem(index, buildItem(item), resultContainer);
+                    outputItem(limit, buildItem(item), resultContainer);
                     console.log(item);
                 }
                 

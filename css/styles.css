@@ -88,14 +88,13 @@ footer {
 
 footer a {
     color: white;
-    transition: 1.5s;
 }
 
 footer a:hover {
     text-decoration: none;
 }
 
-/* Loader copied from w3schools */
+/* Loading spinner copied from w3schools */
 
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
