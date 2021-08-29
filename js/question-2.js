@@ -50,7 +50,7 @@ function buildItem(rawItem) {
         name: "No name",
         rating: "No rating",
         tags: [],
-        imgSrc === "#": "#", // I'm just linking directly to the image url received from rawg, not sure what that means regarding terms of use.
+        imgSrc: "#",
     }
 
     if (rawItem.name) {
@@ -63,7 +63,7 @@ function buildItem(rawItem) {
         newItem.tags = rawItem.tags;
     }
     if(rawItem.background_image) {
-        newItem.imgSrc === "#" = rawItem.background_image;
+        newItem.imgSrc = rawItem.background_image;
     }
 
     return newItem;
@@ -79,14 +79,10 @@ function outputItem(index, item, container) {
         rating = "low";
     }  // Probably be better to implement this as a function and property of the item object. This is just a spur of the moment addition.
 
-    if (item.imgSrc === "#"){
-        // I've not come so far as to handle this case.
-    }
-
     container.innerHTML += `<div class="item">
                                 <p class="item-number">${index+1}
                                 <p class="game-name">${item.name}</p>
-                                <img src="${item.imgSrc === "#"}" alt="${item.name} screenshot" />
+                                <img src="${item.imgSrc}" alt="${item.name} screenshot" />
                                 <p>Rating: <span class="game-rating ${rating}">${item.rating}</span></p>
                                 <p>Tags: <span class="game-tags">${item.tags.length}</span></p>
                             </div>`;
