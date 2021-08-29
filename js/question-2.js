@@ -16,13 +16,16 @@ async function fetchFromApi() {
         const result = await response.json();
         let limit = 8;
         if (result.results) {
-            sectionHeading.innerHTML = `Showing ${limit} results:`; // This would be incorrect if the api returned less results than the specified limit. Could either say "showing UP TO *limit* results", or check limit variable vs results length and display whichever value is the lesser.
+            sectionHeading.innerHTML = `Showing ${limit} results:`; 
+            /* This would be incorrect if the api returned less results than the specified limit.
+               Could either say "showing UP TO {limit} results", or check limit variable vs results length
+               and display whichever value is the lesser.*/
             resultContainer.innerHTML = "";
-            for (let [index, item] of result.results.entries()) { // could do this with a regular for loop, but I like using for of if there's no reason not too.
+            for (let [index, item] of result.results.entries()) {
                 if(index === limit) {
                     break;
-                    //this break seems to work fine on its own without wrapping the item output in an 'else' statement. I suppose that's how 'break' functions, but I added an 'else' to be safe.
                 } else {
+                    //This works fine without 'else' but I've added it to be safe                  
                     outputItem(index, buildItem(item), resultContainer);
                 }
             }
@@ -41,17 +44,13 @@ function buildItem(rawItem) {
        and use that info to create new objects to use for the HTML, 
        rather than plug in the objects directly from the API and 
        potentially receive errors related to object properties. 
-
-       I'm not sure the default values I've provided neccessarily 
-       make sense in the larger scheme of whatever website this
-       would be made for.
     */
 
     var newItem = {
         name: "No name",
         rating: "No rating",
         tags: [],
-        imgSRC: "#", // I'm just linking directly to the image url received from rawg, not sure what that means regarding terms of use.
+        imgSrc === "#": "#", // I'm just linking directly to the image url received from rawg, not sure what that means regarding terms of use.
     }
 
     if (rawItem.name) {
@@ -64,7 +63,7 @@ function buildItem(rawItem) {
         newItem.tags = rawItem.tags;
     }
     if(rawItem.background_image) {
-        newItem.imgSRC = rawItem.background_image;
+        newItem.imgSrc === "#" = rawItem.background_image;
     }
 
     return newItem;
@@ -80,10 +79,14 @@ function outputItem(index, item, container) {
         rating = "low";
     }  // Probably be better to implement this as a function and property of the item object. This is just a spur of the moment addition.
 
+    if (item.imgSrc === "#"){
+        // I've not come so far as to handle this case.
+    }
+
     container.innerHTML += `<div class="item">
                                 <p class="item-number">${index+1}
                                 <p class="game-name">${item.name}</p>
-                                <img src="${item.imgSRC}" alt="${item.name} screenshot" />
+                                <img src="${item.imgSrc === "#"}" alt="${item.name} screenshot" />
                                 <p>Rating: <span class="game-rating ${rating}">${item.rating}</span></p>
                                 <p>Tags: <span class="game-tags">${item.tags.length}</span></p>
                             </div>`;
