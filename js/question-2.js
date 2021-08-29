@@ -51,7 +51,7 @@ function buildItem(rawItem) {
         name: "No name",
         rating: "No rating",
         tags: [],
-        imgSRC: "#",
+        imgSRC: "#", // I'm just linking directly to the image url received from rawg, not sure what that means regarding terms of use.
     }
 
     if (rawItem.name) {
