@@ -16,7 +16,7 @@ async function fetchFromApi() {
         const result = await response.json();
         let limit = 8;
         if (result.results) {
-            sectionHeading.innerHTML = `Showing ${limit} results:`; // This would be incorrect if the api returned less results than the specified limit. Could either say "showing UP TO *limit* results", or use a counter to check how many items we have, and set this html later on.
+            sectionHeading.innerHTML = `Showing ${limit} results:`; // This would be incorrect if the api returned less results than the specified limit. Could either say "showing UP TO *limit* results", or check limit variable vs results length and display whichever value is the lesser.
             resultContainer.innerHTML = "";
             for (let [index, item] of result.results.entries()) { // could do this with a regular for loop, but I like using for of if there's no reason not too.
                 if(index === limit) {
