@@ -41,11 +41,11 @@ body {
 .item {
     background: #293a4e;
     border: 1px solid black;
-    box-shadow: 5px 2px 5px #686868;
+    box-shadow: 2px 5px 3px #686868;
     border-radius: 5px;
     padding: 10px 15px;
     width: 250px;
-    color: white;
+    color: #bccfe4;
 }
 
 .game-name {
@@ -69,7 +69,7 @@ body {
 }
 
 .game-tags {
-    color: #bccfe4;
+    color: white;
 }
 
 img {
