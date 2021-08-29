@@ -6,9 +6,10 @@ const resultContainer = document.querySelector("#result-container")
 const sectionHeading = document.querySelector(".section-header");
 
 async function fetchFromApi() {
+
     //Loader copied from w3schools.
-    sectionHeading.innerHTML = `Fetching from RAWG API
-                                <div class="loader"></div>`;
+    sectionHeading.innerHTML = `Fetching from RAWG API`;
+    resultContainer.innerHTML = `<div class="loader"></div>`;
 
     try {
         const response = await fetch(rawgURL);
@@ -16,20 +17,21 @@ async function fetchFromApi() {
         let limit = 8;
         if (result.results) {
             sectionHeading.innerHTML = `Showing ${limit} results:`;
-            for (let [index, item] of result.results.entries()) { // could do this with a regular for loop, but I've gotten into the habit of using for-of.
+            resultContainer.innerHTML = "";
+            for (let [index, item] of result.results.entries()) { // could do this with a regular for loop, but I like using for of if there's no reason not too.
                 if(index === limit) {
                     break;
                     //this break seems to work fine on its own, without the 'else' statement. I suppose that's how 'break' functions, but I added an 'else' to be safe.
                 } else {
-                    outputItem(limit, buildItem(item), resultContainer);
-                    console.log(item);
+                    outputItem(index, buildItem(item), resultContainer);
                 }
                 
             }
         } 
     } catch (err) {
         console.error(err);
-        sectionHeading.innerHTML = `Something went wrong: <p class="script-error">${err}</p>`
+        sectionHeading.innerHTML = `Something went wrong: <p class="script-error">${err}</p>`;
+        resultContainer.innerHTML = "";
     }
 }
 
@@ -50,7 +52,7 @@ function buildItem(rawItem) {
         name: "No name",
         rating: "No rating",
         tags: [],
-        imgSRC: "",
+        imgSRC: "#",
     }
 
     if (rawItem.name) {
@@ -64,17 +66,15 @@ function buildItem(rawItem) {
     }
     if(rawItem.background_image) {
         newItem.imgSRC = rawItem.background_image;
-        console.log(newItem.imgSRC);
     }
 
     return newItem;
 }
 
 function outputItem(index, item, container) {
-    // Not really sure i need the game number id. I might just be adding whatever stuff I can think to do.
-    // Should change the html for this.
+    
 
-    let rating;
+    let rating; 
     if (item.rating >= 4.5) {
         rating = "high";
     } else {
@@ -82,6 +82,7 @@ function outputItem(index, item, container) {
     }
 
     container.innerHTML += `<div class="item">
+                                <p class="item-number">${index+1}
                                 <p class="game-name">${item.name}</p>
                                 <img src="${item.imgSRC}" alt="${item.name} screenshot" />
                                 <p>Rating: <span class="game-rating ${rating}">${item.rating}</span></p>

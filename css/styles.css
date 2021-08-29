@@ -72,6 +72,10 @@ body {
     color: white;
 }
 
+.item-number {
+    text-align: right;
+}
+
 img {
     max-width: 100%;
 }
