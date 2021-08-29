@@ -25,7 +25,6 @@ async function fetchFromApi() {
                 } else {
                     outputItem(index, buildItem(item), resultContainer);
                 }
-                
             }
         } 
     } catch (err) {
@@ -79,7 +78,7 @@ function outputItem(index, item, container) {
         rating = "high";
     } else {
         rating = "low";
-    }
+    }  // Probably be better to implement this as a function and variable in the item object. This is just a spur of the moment addition.
 
     container.innerHTML += `<div class="item">
                                 <p class="item-number">${index+1}
